@@ -26,7 +26,7 @@ public class PrestamoDAO {
 
     private static final String URL = "jdbc:mysql://localhost:3306/prog2_db?useSSL=false&serverTimezone=UTC";
     private static final String USUARIO = "root";
-    private static final String PASSWORD = "tu_password_aqui";
+    private static final String PASSWORD = "umg2026";
 
     // Repaso: INSERT con generated keys, igual que EstudianteDAO.crear().
     public int registrarPrestamo(Prestamo prestamo) throws SQLException {
@@ -97,8 +97,40 @@ public class PrestamoDAO {
      */
     public List<PrestamoDetalle> listarPrestamosActivosConLibro() throws SQLException {
         List<PrestamoDetalle> resultado = new ArrayList<>();
-        // TODO: ejecutar la consulta con JOIN descrita arriba y llenar "resultado".
+        
+        // Consulta con el filtro para préstamos activos (fecha_devolucion IS NULL)
+        String sql = "SELECT p.nombre_estudiante AS Estudiante, "
+                   + "       l.titulo AS Titulo, "
+                   + "       p.fecha_prestamo "
+                   + "FROM prestamos p "
+                   + "JOIN libros l ON p.libro_id = l.id "
+                   + "WHERE p.fecha_devolucion IS NULL "
+                   + "ORDER BY p.fecha_prestamo";
 
+        try (Connection conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+             PreparedStatement statement = conexion.prepareStatement(sql);
+             ResultSet data = statement.executeQuery()) {
+
+            // Recorremos las filas de la base de datos
+            while (data.next()) {
+                // Mapeamos la fila actual y la agregamos directamente a la lista "resultado"
+                resultado.add(mapearFila(data));
+            }
+        }
+
+        // Devolvemos la lista llena con los datos mapeados
         return resultado;
     }
+
+    private PrestamoDetalle mapearFila(ResultSet resultado) throws SQLException {
+        String tituloLibro = resultado.getString("Titulo");
+        String nombreEstudiante = resultado.getString("Estudiante");
+        
+        // Obtenemos la fecha correctamente como un objeto Date de SQL
+        java.sql.Date fechaSQL = resultado.getDate("fecha_prestamo");
+        java.time.LocalDate fechaPrestamo = (fechaSQL != null) ? fechaSQL.toLocalDate() : null;
+        
+        return new PrestamoDetalle(tituloLibro, nombreEstudiante, fechaPrestamo);
+    }
+
 }
