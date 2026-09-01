@@ -54,6 +54,7 @@ public class Prestamo {
 
     // Cuidado: esto es logica de negocio simple (no SQL), por eso vive en el
     // modelo y no en el DAO: "activo" significa "sin fecha de devolucion".
+    //prueba main
     public boolean esActivo() {
         return fechaDevolucion == null;
     }
