@@ -19,9 +19,7 @@ import java.util.Set;
  * Clase 7 - Biblioteca: repaso de JDBC/DAO (Clase 5) sobre dos tablas
  * relacionadas (libros y prestamos), mas un JOIN y reportes con colecciones.
  *
- * Igual que en Clase 5, Main SOLO muestra el menu y lee lo que escribe el
- * usuario. Toda la logica de base de datos vive en LibroDAO/PrestamoDAO, y
- * los reportes en memoria viven en ReporteService.
+
  */
 public class Main {
 
