@@ -111,14 +111,14 @@ public class PrestamoDAO {
              PreparedStatement statement = conexion.prepareStatement(sql);
              ResultSet data = statement.executeQuery()) {
 
-            // Recorremos las filas de la base de datos
+            // Recorre las filas de la base de datos
             while (data.next()) {
                 // Mapeamos la fila actual y la agregamos directamente a la lista "resultado"
                 resultado.add(mapearFila(data));
             }
         }
 
-        // Devolvemos la lista llena con los datos mapeados
+        // Devolvemos la lista llena con los datos mapeados.
         return resultado;
     }
 
@@ -126,7 +126,7 @@ public class PrestamoDAO {
         String tituloLibro = resultado.getString("Titulo");
         String nombreEstudiante = resultado.getString("Estudiante");
         
-        // Obtenemos la fecha correctamente como un objeto Date de SQL
+        // Obtenemos la fecha correctamente como un objeto Date de Workbench
         java.sql.Date fechaSQL = resultado.getDate("fecha_prestamo");
         java.time.LocalDate fechaPrestamo = (fechaSQL != null) ? fechaSQL.toLocalDate() : null;
         
