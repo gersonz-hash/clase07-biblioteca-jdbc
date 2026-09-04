@@ -26,7 +26,7 @@ public class PrestamoDAO {
 
     private static final String URL = "jdbc:mysql://localhost:3306/tarea5_db";
     private static final String USUARIO = "root";
-    private static final String PASSWORD = "umg2026";
+    private static final String PASSWORD = "Lessen08";
 
     // Repaso: INSERT con generated keys, igual que EstudianteDAO.crear().
     public int registrarPrestamo(Prestamo prestamo) throws SQLException {
