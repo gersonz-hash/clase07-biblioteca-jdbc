@@ -20,8 +20,9 @@ import java.util.Optional;
  */
 public class LibroDAO {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/prog2_db?useSSL=false&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3306/tarea5_db";
     private static final String USUARIO = "root";
+
     private static final String PASSWORD = "umg2026";
 
     public int crear(Libro libro) throws SQLException {
