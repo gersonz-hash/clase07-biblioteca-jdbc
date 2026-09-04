@@ -205,3 +205,17 @@ INSERT IGNORE INTO prestamos (id, libro_id, nombre_estudiante, fecha_prestamo, f
 
 SELECT * FROM prestamos;
 SELECT * FROM libros;
+
+-- creando tabla de inscripciones 
+CREATE TABLE IF NOT EXISTS inscripciones(
+id INT AUTO_INCREMENT PRIMARY KEY,
+estudiante_id INT NOT NULL,
+curso_id INT NOT NULL,
+nota DECIMAL(4,2)NULL,
+ FOREIGN KEY (estudiante_id) REFERENCES estudiantes(id),
+    FOREIGN KEY (curso_id) REFERENCES cursos(id),
+    UNIQUE (estudiante_id, curso_id)
+);
+
+SELECT *FROM inscripciones;
+
